@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GeoJSON Viewer & Editor</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1><i class="fas fa-map-marked-alt"></i> GeoJSON Viewer & Editor</h1>
+            <p>Upload, view, and edit GeoJSON files with an interactive map</p>
+        </header>
+
+        <div class="main-content">
+            <div class="sidebar">
+                <div class="upload-section">
+                    <h3><i class="fas fa-upload"></i> Load GeoJSON</h3>
+                    
+                    <div class="upload-method">
+                        <label for="fileInput" class="upload-btn">
+                            <i class="fas fa-file-upload"></i> Choose File
+                        </label>
+                        <input type="file" id="fileInput" accept=".geojson,.json" style="display: none;">
+                    </div>
+
+                    <div class="url-input">
+                        <label for="urlInput">Or enter URL:</label>
+                        <div class="url-container">
+                            <input type="url" id="urlInput" placeholder="https://example.com/data.geojson">
+                            <button id="loadUrlBtn" class="btn-primary">
+                                <i class="fas fa-download"></i> Load
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="sample-data">
+                        <h4>Sample Data:</h4>
+                        <button class="btn-secondary" onclick="loadSampleData('points')">
+                            <i class="fas fa-map-pin"></i> Sample Points
+                        </button>
+                        <button class="btn-secondary" onclick="loadSampleData('polygons')">
+                            <i class="fas fa-draw-polygon"></i> Sample Polygons
+                        </button>
+                        <button class="btn-secondary" onclick="loadSampleData('lines')">
+                            <i class="fas fa-route"></i> Sample Lines
+                        </button>
+                    </div>
+                </div>
+
+                <div class="data-section">
+                    <h3><i class="fas fa-edit"></i> Edit Data</h3>
+                    <div class="data-controls">
+                        <button id="addFeatureBtn" class="btn-primary" disabled>
+                            <i class="fas fa-plus"></i> Add Feature
+                        </button>
+                        <button id="exportBtn" class="btn-secondary" disabled>
+                            <i class="fas fa-download"></i> Export
+                        </button>
+                        <button id="clearBtn" class="btn-danger" disabled>
+                            <i class="fas fa-trash"></i> Clear
+                        </button>
+                    </div>
+                    
+                    <div class="feature-list">
+                        <h4>Features (<span id="featureCount">0</span>)</h4>
+                        <div id="featureList" class="feature-list-container">
+                            <p class="no-data">No features loaded</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info-section">
+                    <h3><i class="fas fa-info-circle"></i> Info</h3>
+                    <div id="infoContent">
+                        <p>Upload a GeoJSON file or enter a URL to get started.</p>
+                        <p><strong>Supported formats:</strong> .geojson, .json</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="map-container">
+                <div id="map"></div>
+                <div class="map-controls">
+                    <button id="fullscreenBtn" class="map-btn" title="Toggle Fullscreen">
+                        <i class="fas fa-expand"></i>
+                    </button>
+                    <button id="centerBtn" class="map-btn" title="Center Map">
+                        <i class="fas fa-crosshairs"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal for editing features -->
+    <div id="editModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Edit Feature</h3>
+                <span class="close">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="featureType">Type:</label>
+                    <select id="featureType">
+                        <option value="Point">Point</option>
+                        <option value="LineString">LineString</option>
+                        <option value="Polygon">Polygon</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="featureProperties">Properties (JSON):</label>
+                    <textarea id="featureProperties" rows="4" placeholder='{"name": "Example", "description": "..."}'></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="featureCoordinates">Coordinates:</label>
+                    <textarea id="featureCoordinates" rows="4" placeholder="Enter coordinates..."></textarea>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="saveFeatureBtn" class="btn-primary">Save</button>
+                <button id="cancelFeatureBtn" class="btn-secondary">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="script.js"></script>
+</body>
+</html> 

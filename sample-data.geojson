@@ -1,0 +1,67 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-74.006, 40.7128]
+      },
+      "properties": {
+        "name": "New York City",
+        "description": "The Big Apple",
+        "population": "8.4M",
+        "country": "USA"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-118.2437, 34.0522]
+      },
+      "properties": {
+        "name": "Los Angeles",
+        "description": "City of Angels",
+        "population": "4M",
+        "country": "USA"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [-74.006, 40.7128],
+          [-87.6298, 41.8781],
+          [-118.2437, 34.0522]
+        ]
+      },
+      "properties": {
+        "name": "Coast to Coast Route",
+        "description": "Major cities connection",
+        "distance": "2,789 miles",
+        "type": "highway"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [-74.1, 40.7],
+          [-73.9, 40.7],
+          [-73.9, 40.9],
+          [-74.1, 40.9],
+          [-74.1, 40.7]
+        ]]
+      },
+      "properties": {
+        "name": "Manhattan Area",
+        "description": "Central business district",
+        "area": "22.8 sq mi",
+        "type": "urban"
+      }
+    }
+  ]
+} 
